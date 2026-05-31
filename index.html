@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AR Album</title>
+
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+}
+</style>
+</head>
+
+<body>
+
+<a-scene
+  mindar-image="imageTargetSrc: targets.mind;"
+  color-space="sRGB"
+  renderer="colorManagement: true;"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false">
+
+  <a-assets>
+
+    <video id="video1" src="Assets/video1.mp4" preload="auto" loop playsinline webkit-playsinline></video>
+    <video id="video2" src="Assets/video2.mp4" preload="auto" loop playsinline webkit-playsinline></video>
+    <video id="video3" src="Assets/video3.mp4" preload="auto" loop playsinline webkit-playsinline></video>
+    <video id="video4" src="Assets/video4.mp4" preload="auto" loop playsinline webkit-playsinline></video>
+
+  </a-assets>
+
+  <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+
+  <!-- Image 1 -->
+  <a-entity mindar-image-target="targetIndex: 0">
+    <a-video src="#video1" width="1" height="0.6" position="0 0 0"></a-video>
+  </a-entity>
+
+  <!-- Image 2 -->
+  <a-entity mindar-image-target="targetIndex: 1">
+    <a-video src="#video2" width="1" height="0.6" position="0 0 0"></a-video>
+  </a-entity>
+
+  <!-- Image 3 -->
+  <a-entity mindar-image-target="targetIndex: 2">
+    <a-video src="#video3" width="1" height="0.6" position="0 0 0"></a-video>
+  </a-entity>
+
+  <!-- Image 4 -->
+  <a-entity mindar-image-target="targetIndex: 3">
+    <a-video src="#video4" width="1" height="0.6" position="0 0 0"></a-video>
+  </a-entity>
+
+</a-scene>
+
+<script>
+
+const setupVideo = (targetIndex, videoId) => {
+
+  const target = document.querySelector(
+    `[mindar-image-target="targetIndex: ${targetIndex}"]`
+  );
+
+  const video = document.querySelector(videoId);
+
+  target.addEventListener("targetFound", () => {
+    video.currentTime = 0;
+    video.play();
+  });
+
+  target.addEventListener("targetLost", () => {
+    video.pause();
+  });
+
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  setupVideo(0, "#video1");
+  setupVideo(1, "#video2");
+  setupVideo(2, "#video3");
+  setupVideo(3, "#video4");
+
+});
+
+</script>
+
+</body>
+</html>
