@@ -24,35 +24,94 @@ body {
   vr-mode-ui="enabled: false"
   device-orientation-permission-ui="enabled: false">
 
-  <a- >
+  <a-assets>
 
-    <video id="video1" src=" /video1.mp4" preload="auto" loop playsinline webkit-playsinline></video>
-    <video id="video2" src=" /video2.mp4" preload="auto" loop playsinline webkit-playsinline></video>
-    <video id="video3" src=" /video3.mp4" preload="auto" loop playsinline webkit-playsinline></video>
-    <video id="video4" src=" /video4.mp4" preload="auto" loop playsinline webkit-playsinline></video>
+    <video
+      id="video1"
+      src="video1.mp4"
+      preload="auto"
+      loop
+      muted
+      playsinline
+      webkit-playsinline
+      crossorigin="anonymous">
+    </video>
 
-  </a- >
+    <video
+      id="video2"
+      src="video2.mp4"
+      preload="auto"
+      loop
+      muted
+      playsinline
+      webkit-playsinline
+      crossorigin="anonymous">
+    </video>
+
+    <video
+      id="video3"
+      src="video3.mp4"
+      preload="auto"
+      loop
+      muted
+      playsinline
+      webkit-playsinline
+      crossorigin="anonymous">
+    </video>
+
+    <video
+      id="video4"
+      src="video4.mp4"
+      preload="auto"
+      loop
+      muted
+      playsinline
+      webkit-playsinline
+      crossorigin="anonymous">
+    </video>
+
+  </a-assets>
 
   <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-  <!-- Image 1 -->
+  <!-- Target 1 -->
   <a-entity mindar-image-target="targetIndex: 0">
-    <a-video src="#video1" width="1" height="0.6" position="0 0 0"></a-video>
+    <a-video
+      src="#video1"
+      width="1"
+      height="0.6"
+      position="0 0 0">
+    </a-video>
   </a-entity>
 
-  <!-- Image 2 -->
+  <!-- Target 2 -->
   <a-entity mindar-image-target="targetIndex: 1">
-    <a-video src="#video2" width="1" height="0.6" position="0 0 0"></a-video>
+    <a-video
+      src="#video2"
+      width="1"
+      height="0.6"
+      position="0 0 0">
+    </a-video>
   </a-entity>
 
-  <!-- Image 3 -->
+  <!-- Target 3 -->
   <a-entity mindar-image-target="targetIndex: 2">
-    <a-video src="#video3" width="1" height="0.6" position="0 0 0"></a-video>
+    <a-video
+      src="#video3"
+      width="1"
+      height="0.6"
+      position="0 0 0">
+    </a-video>
   </a-entity>
 
-  <!-- Image 4 -->
+  <!-- Target 4 -->
   <a-entity mindar-image-target="targetIndex: 3">
-    <a-video src="#video4" width="1" height="0.6" position="0 0 0"></a-video>
+    <a-video
+      src="#video4"
+      width="1"
+      height="0.6"
+      position="0 0 0">
+    </a-video>
   </a-entity>
 
 </a-scene>
@@ -69,13 +128,13 @@ const setupVideo = (targetIndex, videoId) => {
 
   target.addEventListener("targetFound", () => {
     video.currentTime = 0;
-    video.play();
+    video.muted = true;
+    video.play().catch(err => console.log(err));
   });
 
   target.addEventListener("targetLost", () => {
     video.pause();
   });
-
 };
 
 document.addEventListener("DOMContentLoaded", () => {
